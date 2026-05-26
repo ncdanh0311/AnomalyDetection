@@ -1,9 +1,12 @@
+<p align="center">
+  <img src="./assets/social_anomaly_clustering_animated_logo.gif" alt="Social Anomaly Detection Logo" width="150">
+</p>
 
-<h1 align="center">Social Media Anomaly Account Detection</h1>
-<h3 align="center">Isolation Forest with Graph Features</h3>
+<h1 align="center">Phát hiện tài khoản bất thường trên mạng xã hội</h1>
+<h3 align="center">Isolation Forest kết hợp đặc trưng đồ thị</h3>
 
 <p align="center">
-  <b>Data Mining Project | K-Means | DBSCAN | Graph Feature Engineering | Isolation Forest</b>
+  <b>Đồ án Data Mining | K-Means | Graph Feature Engineering | Isolation Forest</b>
 </p>
 
 <p align="center">
@@ -16,77 +19,79 @@
 </p>
 
 <div align="center">
-  <b><a href="./README_VI.md">Vietnamese Version</a></b>
+  <b><a href="./README_EN.md">English Version</a></b>
 </div>
 
 ---
 
-## Table of Contents
+## Mục lục
 
-- [1. Project Overview](#1-project-overview)
-- [2. Project Goals](#2-project-goals)
+- [1. Tổng quan dự án](#1-tổng-quan-dự-án)
+- [2. Mục tiêu dự án](#2-mục-tiêu-dự-án)
 - [3. Dataset](#3-dataset)
-- [4. Methodology](#4-methodology)
-- [5. Old Baseline Algorithms](#5-old-baseline-algorithms)
+- [4. Phương pháp thực hiện](#4-phương-pháp-thực-hiện)
+- [5. Thuật toán baseline cũ](#5-thuật-toán-baseline-cũ)
 - [6. Graph Feature Engineering](#6-graph-feature-engineering)
-- [7. Isolation Forest Anomaly Detection](#7-isolation-forest-anomaly-detection)
+- [7. Phát hiện bất thường bằng Isolation Forest](#7-phát-hiện-bất-thường-bằng-isolation-forest)
 - [8. Rule-Based Suspicious Score](#8-rule-based-suspicious-score)
-- [9. Algorithm Comparison](#9-algorithm-comparison)
-- [10. Visualization Outputs](#10-visualization-outputs)
-- [11. Project Structure](#11-project-structure)
-- [12. Notebook Workflow](#12-notebook-workflow)
-- [13. How to Run](#13-how-to-run)
-- [14. Expected Outputs](#14-expected-outputs)
-- [15. Notes and Limitations](#15-notes-and-limitations)
-- [16. Conclusion](#16-conclusion)
+- [9. So sánh thuật toán](#9-so-sánh-thuật-toán)
+- [10. Kết quả trực quan hóa](#10-kết-quả-trực-quan-hóa)
+- [11. Cấu trúc project](#11-cấu-trúc-project)
+- [12. Quy trình chạy notebook](#12-quy-trình-chạy-notebook)
+- [13. Cách chạy](#13-cách-chạy)
+- [14. Output mong đợi](#14-output-mong-đợi)
+- [15. Ghi chú và hạn chế](#15-ghi-chú-và-hạn-chế)
+- [16. Kết luận](#16-kết-luận)
 
 ---
 
-## 1. Project Overview
+## 1. Tổng quan dự án
 
-This project detects anomalous social media accounts using a Data Mining pipeline. It is upgraded from an older clustering-based project that used **K-Means** and **DBSCAN** to find abnormal user behavior.
+Project này phát hiện các tài khoản bất thường trên mạng xã hội bằng một pipeline Data Mining. Đây là phiên bản nâng cấp từ project clustering cũ, vốn sử dụng **K-Means** để tìm hành vi người dùng bất thường.
 
-The new project topic is:
+Tên đề tài mới:
 
 ```text
-Social media anomaly account detection using Isolation Forest with graph features
+Phát hiện tài khoản bất thường trên mạng xã hội bằng Isolation Forest kết hợp đặc trưng đồ thị
 ```
 
-The upgrade keeps the old project structure, old notebooks, preprocessing code, feature engineering steps, scaling, PCA visualization, and clustering baselines. The new contribution is an additional anomaly detection pipeline based on:
+Phiên bản nâng cấp vẫn giữ cấu trúc project baseline, các notebook baseline, code preprocessing, các bước feature engineering, scaling, PCA visualization và thuật toán clustering baseline. Phần đóng góp mới là pipeline phát hiện bất thường bổ sung dựa trên:
 
 - Graph feature engineering
 - Isolation Forest
-- Simple rule-based suspicious scoring
-- Comparison with K-Means and DBSCAN
+- Rule-based suspicious scoring đơn giản
+- So sánh với K-Means baseline
 
---
+Đây là một **đồ án Data Mining**, không phải project Deep Learning hay NLP phức tạp. Project không sử dụng Deep Learning, XGBoost, BERT, LSTM hoặc transformer models.
 
-## 2. Project Goals
+---
 
-The main goals are:
+## 2. Mục tiêu dự án
 
-- Preserve the original clustering project and use it as a baseline.
-- Reuse the existing data loading, preprocessing, feature engineering, scaling, PCA, evaluation, and visualization logic.
-- Build a user interaction graph from the available social media metadata.
-- Extract graph-based features for each user.
-- Train an Isolation Forest model for unsupervised anomaly detection.
-- Add a simple rule-based suspicious score to make the anomaly score more interpretable.
-- Compare K-Means, DBSCAN, and Isolation Forest in one consistent pipeline.
-- Produce CSV outputs, trained models, and visualizations for a complete Data Mining report.
+Các mục tiêu chính:
+
+- Giữ lại project clustering gốc (K-Means) và dùng làm baseline.
+- Tái sử dụng logic load dữ liệu, preprocessing, feature engineering, scaling, PCA, evaluation và visualization đã có.
+- Xây dựng user interaction graph từ metadata mạng xã hội hiện có.
+- Trích xuất graph-based features cho từng user.
+- Huấn luyện Isolation Forest cho bài toán phát hiện bất thường không giám sát.
+- Thêm suspicious score đơn giản dựa trên luật để anomaly score dễ giải thích hơn.
+- So sánh K-Means và Isolation Forest trong cùng một pipeline nhất quán.
+- Tạo CSV outputs, trained models và visualizations phục vụ báo cáo đồ án Data Mining.
 
 ---
 
 ## 3. Dataset
 
-The project uses a Twitter/X-style bot detection dataset.
+Project sử dụng dataset dạng Twitter/X bot detection.
 
-Main raw file:
+File raw chính:
 
 ```text
 datasets/raw/bot_detection_data.csv
 ```
 
-Processed files from the old pipeline:
+Các file processed từ pipeline:
 
 ```text
 datasets/cleaned/bot_detection_clean.csv
@@ -95,64 +100,63 @@ datasets/processed/user_features_scaled.csv
 datasets/processed/user_features_with_label.csv
 ```
 
-### 3.1 Main Columns
+### 3.1 Các cột chính
 
-| Column | Description | Usage |
+| Cột | Mô tả | Cách sử dụng |
 | --- | --- | --- |
-| `user_id` | Unique user identifier | Node ID and result mapping |
-| `username` | Account username | Used to derive username length |
-| `tweet` | Tweet content | Used to derive tweet length |
-| `retweet_count` | Number of retweets | Behavior feature |
-| `mention_count` | Number of mentions | Behavior feature |
-| `follower_count` | Number of followers | Behavior feature |
-| `verified` | Account verification status | Behavior feature |
-| `hashtags` | Hashtag/token text | Hashtag similarity and hashtag features |
-| `created_at` | Date/time information | Account age feature |
-| `bot_label` | Available label | Evaluation only, not used for unsupervised training |
+| `user_id` | Mã định danh duy nhất của user | Node ID và mapping kết quả |
+| `username` | Tên tài khoản | Dùng để tạo username length |
+| `tweet` | Nội dung tweet | Dùng để tạo tweet length |
+| `retweet_count` | Số lượt retweet | Behavior feature |
+| `mention_count` | Số lượt mention | Behavior feature |
+| `follower_count` | Số follower | Behavior feature |
+| `verified` | Trạng thái xác minh tài khoản | Behavior feature |
+| `hashtags` | Hashtag/token text | Hashtag similarity và hashtag features |
+| `created_at` | Thông tin ngày/giờ | Account age feature |
+| `bot_label` | Nhãn có sẵn | Chỉ dùng để đánh giá, không dùng khi train unsupervised |
 
-The label column is used only after model training to evaluate the results. The unsupervised models do not use `bot_label` during fitting.
+Cột label chỉ được dùng sau khi mô hình đã train để đánh giá kết quả. Các mô hình không giám sát không sử dụng `bot_label` trong quá trình fit.
 
 ---
 
-## 4. Methodology
+## 4. Phương pháp thực hiện
 
-The upgraded project follows this Data Mining pipeline:
+Project nâng cấp đi theo pipeline Data Mining sau:
 
 ```text
 Raw dataset
     -> Data cleaning
     -> Feature engineering
     -> Feature scaling
-    -> Baseline clustering with K-Means and DBSCAN
+    -> Baseline clustering với K-Means
     -> Graph construction
     -> Graph feature extraction
     -> Isolation Forest anomaly detection
     -> Rule-based suspicious score
     -> Algorithm comparison
-    -> Visualization and reporting
+    -> Visualization và reporting
 ```
 
-The old clustering workflow is preserved so the new method can be compared against the original project.
+Workflow clustering baseline được giữ lại để có thể so sánh phương pháp mới với project ban đầu.
 
 ---
 
-## 5. Old Baseline Algorithms
+## 5. Thuật toán baseline cũ
 
-The original project notebooks are kept:
+Các notebook gốc được giữ lại:
 
 ```text
 notebooks/01_explore_dataset.ipynb
 notebooks/02_preprocessing_feature_engineering.ipynb
 notebooks/03_kmeans_clustering.ipynb
-notebooks/04_dbscan_clustering.ipynb
 notebooks/05_evaluation_visualization_updated.ipynb
 ```
 
 ### K-Means
 
-K-Means groups users into behavior clusters. Users far from cluster centers are treated as potential anomalies.
+K-Means gom nhóm user thành các cụm hành vi. Những user nằm xa tâm cụm được xem là anomaly tiềm năng (thuộc top 5% của khoảng cách lớn nhất).
 
-Main outputs:
+Output chính:
 
 ```text
 results/csv/kmeans_clustered_users.csv
@@ -160,49 +164,37 @@ results/csv/kmeans_anomaly_users.csv
 results/models/kmeans_model.pkl
 ```
 
-### DBSCAN
-
-DBSCAN identifies dense regions and marks low-density points as noise. Noise points are treated as potential anomalies.
-
-Main outputs:
-
-```text
-results/csv/dbscan_clustered_users.csv
-results/csv/dbscan_anomaly_users.csv
-results/models/dbscan_model.pkl
-```
-
-These algorithms remain important because they provide the baseline for evaluating whether the new graph-enhanced Isolation Forest pipeline adds value.
+Thuật toán gom cụm baseline đóng vai trò làm điểm đối chứng để đánh giá hiệu quả của phương pháp nâng cấp.
 
 ---
 
 ## 6. Graph Feature Engineering
 
-New notebook:
+Notebook mới:
 
 ```text
 notebooks/06_graph_feature_engineering.ipynb
 ```
 
-Each user is represented as a graph node.
+Mỗi user được biểu diễn như một node trong graph.
 
-The dataset does not contain direct user-to-user relations such as `user A mentions user B` or `user A retweets user B`. Because of that, the graph is built from relation proxies available in the dataset:
+Dataset không chứa quan hệ user-user trực tiếp như `user A mentions user B` hoặc `user A retweets user B`. Vì vậy, graph được xây dựng từ các quan hệ thay thế có thể suy ra từ dataset:
 
-- `feature_similarity`: cosine similarity between scaled user behavior features.
-- `hashtag_similarity`: users sharing similar hashtag/token text.
-- `interaction_similarity`: users with similar `mention_count`, `retweet_count`, and `hashtag_count`.
+- `feature_similarity`: cosine similarity giữa các behavior features đã scale.
+- `hashtag_similarity`: user có hashtag/token text tương tự nhau.
+- `interaction_similarity`: user có `mention_count`, `retweet_count` và `hashtag_count` tương tự nhau.
 
-### 6.1 Generated Graph Features
+### 6.1 Graph features được tạo
 
-The notebook computes the following graph features for each user:
+Notebook tính các graph features sau cho từng user:
 
-| Feature | Meaning |
+| Feature | Ý nghĩa |
 | --- | --- |
-| `degree` | Number of graph connections for a user |
-| `degree_centrality` | Relative node centrality based on degree |
-| `clustering_coefficient` | How strongly the user belongs to local graph neighborhoods |
-| `interaction_score` | Normalized weighted degree / interaction strength |
-| `pagerank` | Graph importance score based on link structure |
+| `degree` | Số kết nối graph của user |
+| `degree_centrality` | Độ trung tâm tương đối dựa trên degree |
+| `clustering_coefficient` | Mức độ user thuộc về các local graph neighborhoods |
+| `interaction_score` | Weighted degree / interaction strength đã chuẩn hóa |
+| `pagerank` | Điểm quan trọng của node dựa trên cấu trúc liên kết |
 
 Output:
 
@@ -212,26 +204,26 @@ datasets/processed/user_graph_features.csv
 
 ---
 
-## 7. Isolation Forest Anomaly Detection
+## 7. Phát hiện bất thường bằng Isolation Forest
 
-New notebook:
+Notebook mới:
 
 ```text
 notebooks/07_isolation_forest_anomaly_detection.ipynb
 ```
 
-Isolation Forest is used as the main upgraded anomaly detection algorithm. It is suitable for this project because:
+Isolation Forest được sử dụng làm thuật toán phát hiện bất thường chính trong phần nâng cấp. Thuật toán này phù hợp với project vì:
 
-- It is unsupervised.
-- It works well with numerical behavior features.
-- It detects observations that are easier to isolate from the majority.
-- It is simpler and more appropriate for a Data Mining project than Deep Learning models.
+- Là phương pháp không giám sát.
+- Hoạt động tốt với các numerical behavior features.
+- Phát hiện các quan sát dễ bị cô lập khỏi phần lớn dữ liệu.
+- Đơn giản và phù hợp với đồ án Data Mining hơn các mô hình Deep Learning.
 
-### 7.1 Feature Set
+### 7.1 Bộ feature sử dụng
 
-Isolation Forest uses both old behavior features and new graph features.
+Isolation Forest sử dụng cả behavior features cũ và graph features mới.
 
-Old behavior features:
+Behavior features cũ:
 
 ```text
 retweet_count
@@ -245,7 +237,7 @@ has_hashtag
 account_age_days
 ```
 
-New graph features:
+Graph features mới:
 
 ```text
 degree
@@ -255,21 +247,21 @@ interaction_score
 pagerank
 ```
 
-### 7.2 Output Columns
+### 7.2 Các cột output
 
-The Isolation Forest result file contains:
+File kết quả Isolation Forest gồm:
 
-| Column | Meaning |
+| Cột | Ý nghĩa |
 | --- | --- |
-| `isolation_score` | Normalized Isolation Forest anomaly score |
-| `anomaly_score` | Alias for the Isolation Forest score |
-| `anomaly_label` | Isolation Forest label, `-1 = anomaly`, `1 = normal` |
-| `suspicious_score` | Rule-based suspicious behavior score |
-| `final_anomaly_score` | Combined anomaly score |
-| `final_anomaly_label` | Final label, `-1 = anomaly`, `1 = normal` |
-| `is_anomaly` | Binary label for comparison, `1 = anomaly`, `0 = normal` |
+| `isolation_score` | Isolation Forest anomaly score đã chuẩn hóa |
+| `anomaly_score` | Alias cho Isolation Forest score |
+| `anomaly_label` | Nhãn Isolation Forest, `-1 = anomaly`, `1 = normal` |
+| `suspicious_score` | Điểm nghi ngờ dựa trên luật |
+| `final_anomaly_score` | Điểm anomaly tổng hợp |
+| `final_anomaly_label` | Nhãn cuối cùng, `-1 = anomaly`, `1 = normal` |
+| `is_anomaly` | Nhãn binary dùng để so sánh, `1 = anomaly`, `0 = normal` |
 
-Main outputs:
+Output chính:
 
 ```text
 results/csv/isolation_forest_results.csv
@@ -280,47 +272,46 @@ results/models/isolation_forest.pkl
 
 ## 8. Rule-Based Suspicious Score
 
-The project adds a simple suspicious score to make the final anomaly score more interpretable.
+Project bổ sung một suspicious score đơn giản để final anomaly score dễ giải thích hơn.
 
-This score is not a complex machine learning model. It is based on straightforward behavior rules such as:
+Điểm này không phải là mô hình machine learning phức tạp. Nó dựa trên các luật hành vi trực tiếp như:
 
-- Very high hashtag count.
-- Very high hashtag ratio.
-- Very high mention count.
-- Very high retweet count.
-- High retweet activity compared with follower count.
-- Low followers but high activity.
-- Very high graph interaction score.
+- Hashtag count rất cao.
+- Hashtag ratio rất cao.
+- Mention count rất cao.
+- Retweet count rất cao.
+- Retweet activity cao so với follower count.
+- Follower thấp nhưng activity cao.
+- Graph interaction score rất cao.
 
-Each triggered condition adds one suspicious point. The score is then normalized to `[0, 1]`.
+Mỗi điều kiện đúng sẽ cộng một điểm nghi ngờ. Sau đó điểm được chuẩn hóa về `[0, 1]`.
 
-Final score:
+Điểm cuối cùng:
 
 ```text
 final_anomaly_score = 0.7 * isolation_score + 0.3 * suspicious_score
 ```
 
-This keeps the model simple while still adding domain-oriented behavior signals.
+Cách này giữ mô hình đơn giản nhưng vẫn bổ sung được các tín hiệu hành vi có ý nghĩa miền bài toán.
 
 ---
 
-## 9. Algorithm Comparison
+## 9. So sánh thuật toán
 
-New notebook:
+Notebook mới:
 
 ```text
 notebooks/08_compare_algorithms.ipynb
 ```
 
-This notebook compares:
+Notebook này so sánh:
 
-- K-Means
-- DBSCAN
-- Isolation Forest with graph features
+- K-Means (Baseline)
+- Isolation Forest kết hợp graph features (Upgraded)
 
-### 9.1 Metrics When Labels Are Available
+### 9.1 Metrics khi có label
 
-If `bot_label` exists, the notebook computes:
+Nếu có `bot_label`, notebook tính:
 
 - Accuracy
 - Precision
@@ -328,23 +319,22 @@ If `bot_label` exists, the notebook computes:
 - F1-score
 - Confusion matrix
 
-### 9.2 Metrics Without Labels
+### 9.2 Metrics khi không có label
 
-If labels are unavailable, the notebook can still compare:
+Nếu không có label, notebook vẫn có thể so sánh bằng:
 
 - Silhouette score
 - Anomaly distribution
 - Anomaly ratio
 - PCA visualization
 
-### 9.3 Current Comparison Output
+### 9.3 Output so sánh hiện tại
 
-The generated comparison summary:
+Bảng summary đã tạo:
 
 | Algorithm | Total Users | Anomaly Users | Normal Users | Anomaly Ratio |
 | --- | ---: | ---: | ---: | ---: |
 | K-Means | 50,000 | 2,500 | 47,500 | 5.00% |
-| DBSCAN | 50,000 | 2,816 | 47,184 | 5.63% |
 | Isolation Forest | 50,000 | 2,500 | 47,500 | 5.00% |
 
 Output files:
@@ -356,34 +346,34 @@ results/csv/algorithm_comparison_detailed.csv
 
 ---
 
-## 10. Visualization Outputs
+## 10. Kết quả trực quan hóa
 
-Visualizations are saved in:
+Các biểu đồ được lưu trong:
 
 ```text
 results/figures/
 ```
 
-Important figures include:
+Một số figure quan trọng:
 
-| Figure | Description |
+| Figure | Mô tả |
 | --- | --- |
 | `network_graph_sample.png` | Sample social interaction graph |
-| `graph_degree_distribution.png` | Degree distribution |
-| `graph_feature_correlation.png` | Correlation between graph features |
-| `isolation_forest_anomaly_score_distribution.png` | Final anomaly score distribution |
-| `pca_isolation_forest_anomaly.png` | PCA visualization for Isolation Forest anomalies |
-| `isolation_graph_feature_correlation.png` | Correlation between graph features and anomaly scores |
-| `compare_algorithms_anomaly_users.png` | Anomaly user count by algorithm |
-| `compare_algorithms_anomaly_ratio.png` | Anomaly ratio by algorithm |
-| `compare_algorithms_metrics.png` | Accuracy, precision, recall, and F1 comparison |
-| `compare_algorithms_pca_anomaly.png` | PCA anomaly comparison for all algorithms |
+| `graph_degree_distribution.png` | Phân bố degree |
+| `graph_feature_correlation.png` | Tương quan giữa các graph features |
+| `isolation_forest_anomaly_score_distribution.png` | Phân bố final anomaly score |
+| `pca_isolation_forest_anomaly.png` | PCA visualization cho anomaly của Isolation Forest |
+| `isolation_graph_feature_correlation.png` | Tương quan giữa graph features và anomaly scores |
+| `compare_algorithms_anomaly_users.png` | Số anomaly users theo thuật toán |
+| `compare_algorithms_anomaly_ratio.png` | Tỷ lệ anomaly theo thuật toán |
+| `compare_algorithms_metrics.png` | So sánh accuracy, precision, recall và F1 |
+| `compare_algorithms_pca_anomaly.png` | So sánh PCA anomaly cho các thuật toán |
 
 ---
 
-## 11. Project Structure
+## 11. Cấu trúc project
 
-The old project structure is preserved. No new `src/`-based architecture is required for the upgrade.
+Cấu trúc thư mục của project như sau:
 
 ```text
 social-anomaly-detection/
@@ -406,15 +396,26 @@ social-anomaly-detection/
 │   ├── 01_explore_dataset.ipynb
 │   ├── 02_preprocessing_feature_engineering.ipynb
 │   ├── 03_kmeans_clustering.ipynb
-│   ├── 04_dbscan_clustering.ipynb
 │   ├── 05_evaluation_visualization_updated.ipynb
 │   ├── 06_graph_feature_engineering.ipynb
 │   ├── 07_isolation_forest_anomaly_detection.ipynb
 │   └── 08_compare_algorithms.ipynb
 ├── results/
 │   ├── csv/
+│   │   ├── algorithm_comparison.csv
+│   │   ├── algorithm_comparison_detailed.csv
+│   │   ├── anomaly_summary.csv
+│   │   ├── cluster_summary.csv
+│   │   ├── evaluation_summary.csv
+│   │   ├── feature_summary_by_anomaly.csv
+│   │   ├── isolation_forest_results.csv
+│   │   └── kmeans_anomaly_users.csv
 │   ├── figures/
 │   └── models/
+│       ├── isolation_forest.pkl
+│       ├── kmeans_model.pkl
+│       ├── pca_model.pkl
+│       └── scaler.pkl
 ├── README.md
 ├── README_VI.md
 └── requirements.txt
@@ -422,42 +423,41 @@ social-anomaly-detection/
 
 ---
 
-## 12. Notebook Workflow
+## 12. Quy trình chạy notebook
 
-Recommended execution order:
+Thứ tự chạy được khuyến nghị:
 
 ```text
 01_explore_dataset.ipynb
     -> 02_preprocessing_feature_engineering.ipynb
     -> 03_kmeans_clustering.ipynb
-    -> 04_dbscan_clustering.ipynb
     -> 05_evaluation_visualization_updated.ipynb
     -> 06_graph_feature_engineering.ipynb
     -> 07_isolation_forest_anomaly_detection.ipynb
     -> 08_compare_algorithms.ipynb
 ```
 
-The first five notebooks are the original baseline workflow. The last three notebooks are the upgraded Data Mining contribution.
+Bốn notebook đầu là workflow baseline gốc. Ba notebook cuối là phần đóng góp nâng cấp cho đồ án Data Mining.
 
 ---
 
-## 13. How to Run
+## 13. Cách chạy
 
-### 13.1 Install Dependencies
+### 13.1 Cài dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 13.2 Start Jupyter Notebook
+### 13.2 Mở Jupyter Notebook
 
 ```bash
 jupyter notebook
 ```
 
-Then run the notebooks in the recommended order.
+Sau đó chạy các notebook theo đúng thứ tự được khuyến nghị.
 
-### 13.3 Optional: Execute with nbconvert
+### 13.3 Tùy chọn: chạy bằng nbconvert
 
 ```bash
 python -m jupyter nbconvert --to notebook --execute --inplace notebooks/06_graph_feature_engineering.ipynb
@@ -465,7 +465,7 @@ python -m jupyter nbconvert --to notebook --execute --inplace notebooks/07_isola
 python -m jupyter nbconvert --to notebook --execute --inplace notebooks/08_compare_algorithms.ipynb
 ```
 
-On some Windows environments, Jupyter may fail with a permission error related to `SetFileSecurity`. If that happens, run:
+Trên một số môi trường Windows, Jupyter có thể gặp lỗi quyền liên quan đến `SetFileSecurity`. Nếu gặp lỗi đó, chạy:
 
 ```powershell
 $env:JUPYTER_ALLOW_INSECURE_WRITES='1'
@@ -474,13 +474,13 @@ python -m jupyter nbconvert --to notebook --execute --inplace notebooks\07_isola
 python -m jupyter nbconvert --to notebook --execute --inplace notebooks\08_compare_algorithms.ipynb
 ```
 
-Run the notebooks sequentially. Running multiple notebooks in parallel can cause temporary Jupyter kernel port conflicts on Windows.
+Nên chạy notebook tuần tự. Chạy nhiều notebook song song trên Windows có thể gây xung đột port kernel tạm thời.
 
 ---
 
-## 14. Expected Outputs
+## 14. Output mong đợi
 
-After running the full pipeline, the expected key outputs are:
+Sau khi chạy toàn bộ pipeline, các output quan trọng là:
 
 ```text
 datasets/processed/user_graph_features.csv
@@ -491,40 +491,37 @@ results/models/isolation_forest.pkl
 results/figures/
 ```
 
-The project also keeps the original K-Means and DBSCAN outputs:
+Project vẫn giữ các output K-Means baseline gốc:
 
 ```text
 results/csv/kmeans_clustered_users.csv
 results/csv/kmeans_anomaly_users.csv
-results/csv/dbscan_clustered_users.csv
-results/csv/dbscan_anomaly_users.csv
 results/models/kmeans_model.pkl
-results/models/dbscan_model.pkl
 ```
 
 ---
 
-## 15. Notes and Limitations
+## 15. Ghi chú và hạn chế
 
-- The dataset does not contain explicit user-to-user edges, so graph edges are constructed from similarity-based proxies.
-- `bot_label` is used only for evaluation, not for unsupervised model training.
-- Isolation Forest is configured as a simple, interpretable Data Mining method.
-- The rule-based suspicious score is intentionally simple and should be treated as a supporting signal, not a standalone classifier.
-- The project does not use Deep Learning, XGBoost, BERT, LSTM, or transformer-based text modeling.
-- The goal is not to build a production bot detector, but to demonstrate a complete anomaly detection pipeline with enhanced feature engineering.
+- Dataset không có explicit user-to-user edges, vì vậy graph edges được xây dựng bằng các similarity-based proxies.
+- `bot_label` chỉ dùng để đánh giá, không dùng để train mô hình unsupervised.
+- Isolation Forest được cấu hình như một phương pháp Data Mining đơn giản và dễ giải thích.
+- Rule-based suspicious score cố ý được giữ đơn giản và nên được xem là tín hiệu hỗ trợ, không phải classifier độc lập.
+- Project không sử dụng Deep Learning, XGBoost, BERT, LSTM hoặc transformer-based text modeling.
+- Mục tiêu không phải xây dựng bot detector production, mà là trình bày một anomaly detection pipeline hoàn chỉnh với feature engineering nâng cao.
 
 ---
 
-## 16. Conclusion
+## 16. Kết luận
 
-This upgraded version turns the old clustering project into a more complete Data Mining project. It keeps K-Means and DBSCAN as baselines, adds graph feature engineering, trains Isolation Forest for anomaly detection, and compares all methods with consistent outputs and visualizations.
+Phiên bản nâng cấp này biến project clustering cũ thành một đồ án Data Mining hoàn chỉnh hơn. Project giữ K-Means làm baseline, bổ sung graph feature engineering, huấn luyện Isolation Forest để phát hiện bất thường, và so sánh cả hai phương pháp bằng output và visualization nhất quán.
 
-The final project focuses on:
+Project cuối cùng tập trung vào:
 
 - Anomaly detection
 - Feature engineering
 - Graph-based behavioral features
-- Simple unsupervised modeling
-- Clear evaluation and visualization
+- Mô hình unsupervised đơn giản
+- Evaluation và visualization rõ ràng
 
-The Vietnamese documentation is available in [README_VI.md](./README_VI.md).
+Tài liệu tiếng Anh có tại [README.md](./README.md).
