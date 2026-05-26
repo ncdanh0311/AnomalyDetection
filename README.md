@@ -524,4 +524,4 @@ Project cuối cùng tập trung vào:
 - Mô hình unsupervised đơn giản
 - Evaluation và visualization rõ ràng
 
-Tài liệu tiếng Anh có tại [README.md](./README.md).
+Tài liệu tiếng Anh có tại [README_EN.md](./README_EN.md).
